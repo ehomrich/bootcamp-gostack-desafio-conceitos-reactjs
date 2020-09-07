@@ -14,7 +14,16 @@ function App() {
   }, []);
 
   async function handleAddRepository() {
-    // TODO
+    const title = `Projeto ${Date.now()}`;
+    const slug = title.toLowerCase().split(' ').join('-');
+
+    const { data } = await api.post('repositories', {
+      title,
+      url: `https://github.com/test/${slug}`,
+      techs: ['Node.js', 'ReactJS'],
+    });
+
+    setRepositories([...repositories, data]);
   }
 
   async function handleRemoveRepository(id) {
